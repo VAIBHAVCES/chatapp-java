@@ -14,7 +14,7 @@ client.onConnect = (frame) => {
         console.log("Message received: ");
         console.log(msg.body);
         console.log(JSON.parse(msg.body));
-       receiveMessage(JSON.parse(msg.body));
+//        receiveMessage(JSON.parse(msg));
     });
 };
 
