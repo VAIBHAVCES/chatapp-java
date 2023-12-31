@@ -6,17 +6,25 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
+
+import java.security.Principal;
 
 @Controller
 @Slf4j
 //@EnableWebSocket
 public class ChatController {
 
+
+
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
-    public ChatMessage sendMessage(@Payload ChatMessage chatMessage){
+    @SendToUser
+    public ChatMessage sendMessage(@Payload ChatMessage chatMessage, Principal user){
+
+        log.info("User: "+user);
         return chatMessage;
     }
 

@@ -10,7 +10,10 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.messaging.SessionConnectEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
+
+import java.security.Principal;
 
 @Component
 @RequiredArgsConstructor
@@ -20,6 +23,15 @@ public class WebSocketEventListener {
 
     private final SimpMessageSendingOperations messageTemplate;
     @EventListener
+
+
+    public void handleConectionOfUser(SessionConnectEvent sessionConnectEvent){
+
+        Principal user = sessionConnectEvent.getUser();
+        log.info("Session connected : "+user);
+        return;
+    }
+
     public void handleDisconnectionOfUser(SessionDisconnectEvent sessionDisconnectEvent){
         // TODO
 
